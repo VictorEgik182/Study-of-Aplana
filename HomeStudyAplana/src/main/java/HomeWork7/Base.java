@@ -3,10 +3,12 @@
  *
  * @author Victor
  * Modified 13.09.2018
+ * Modified 03.10.2018
  */
 
 package HomeWork7;
 
+import java.util.InputMismatchException;
 import java.util.Scanner;
 
 public class Base {
@@ -19,27 +21,33 @@ public class Base {
         System.out.println("2.Вычитание");
         System.out.println("3.Умножение");
         System.out.println("4.Деление");
-        System.out.println("\nВыбрана операция: ");
+        System.out.println("\nВведите число в соответствии с выбранной операцией.Нажмите Enter: ");
 
-        Calculator Calculator;
+        Calculator Calculator = null;
         {
             int operator;
-            operator = scanner.nextInt( );
-            switch ( operator ) {
-                case 1:
-                    Calculator = new additionNumbers();
-                break;
-                case 2:
-                    Calculator = new subtractionNumbers();
-                break;
-                case 3:
-                    Calculator = new multiplicationNumbers();
-                break;
-                case 4:
-                    Calculator = new divisionNumbers();
-                break;
-                default:
-                    throw new ArithmeticException("Ошибка!Нет такой операции!Повторите еще раз!");
+            try {
+                operator = scanner.nextInt( );
+                switch ( operator ) {
+                    case 1:
+                        Calculator = new additionNumbers( );
+                        break;
+                    case 2:
+                        Calculator = new subtractionNumbers( );
+                        break;
+                    case 3:
+                        Calculator = new multiplicationNumbers( );
+                        break;
+                    case 4:
+                        Calculator = new divisionNumbers( );
+                        break;
+                    default:
+                        throw new ArithmeticException("Ошибка!Нет такой операции!Повторите еще раз!");
+                }
+            } catch (InputMismatchException e) {
+                throw new InputMismatchException("Ошибка ввода!Неверный формат данных");
+            } catch (NullPointerException e) {
+                throw new NullPointerException("Ошибка ввода!Неверный формат данных");
             }
         }
         Calculator.inputValue1 ();
